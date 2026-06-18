@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Юридический ИИ: тренажер экзамена</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="exam">
+        <div class="topbar">
+          <div>
+            <p class="kicker">Гражданское право</p>
+            <h1>Юридический ИИ-экзаменатор</h1>
+          </div>
+          <div class="score-pill" aria-live="polite">
+            <span id="progressText">1 / 96</span>
+            <strong id="lastScore">-</strong>
+          </div>
+        </div>
+
+        <div class="question-band">
+          <div class="question-meta">
+            <span id="modeLabel">устный зачет</span>
+            <button id="shuffleBtn" class="icon-btn" type="button" title="Случайный вопрос">↻</button>
+          </div>
+          <h2 id="questionText"></h2>
+          <div class="question-actions">
+            <button id="prevBtn" type="button">← Предыдущий</button>
+            <button id="nextBtn" type="button">Следующий →</button>
+          </div>
+        </div>
+
+        <section class="answer-zone" aria-label="Ответ студента">
+          <div class="toolbar">
+            <button id="micBtn" class="primary" type="button">● Начать голосовой ответ</button>
+            <button id="checkBtn" type="button">Проверить</button>
+            <button id="clearBtn" type="button">Очистить</button>
+          </div>
+          <textarea id="studentAnswer" placeholder="Отвечайте голосом или напишите ответ здесь. Главное: раскрыть юридическую суть, назвать признаки, виды, условия, последствия и нормы, если они есть в теме."></textarea>
+          <p id="voiceStatus" class="status">Голосовой ввод работает в Chrome/Edge через localhost. Если браузер не спросил микрофон, откройте сайт по адресу http://localhost:8787/ именно в Chrome или Edge.</p>
+          <div class="voice-help">
+            <button id="voiceTestBtn" type="button">Проверить микрофон</button>
+            <button id="copyUrlBtn" type="button">Скопировать адрес сайта</button>
+            <span id="voiceHint">Запасной вариант: нажмите Win + H и диктуйте прямо в поле ответа.</span>
+          </div>
+        </section>
+      </section>
+
+      <aside class="review">
+        <div class="tabs tabs-two" role="tablist" aria-label="Разбор ответа">
+          <button class="tab active" data-tab="feedback" type="button">Разбор</button>
+          <button class="tab" data-tab="list" type="button">Вопросы</button>
+        </div>
+
+        <section id="feedbackPanel" class="panel active">
+          <div class="meter">
+            <div id="meterFill"></div>
+          </div>
+          <h3 id="verdictTitle">Готов принять ответ</h3>
+          <p id="verdictText">Выберите вопрос, проговорите ответ и нажмите проверку. Я оценю не дословность, а юридическую структуру и смысл.</p>
+          <div class="grid">
+            <div>
+              <h4>Попали в суть</h4>
+              <ul id="matchedList"></ul>
+            </div>
+            <div>
+              <h4>Нужно добавить</h4>
+              <ul id="missingList"></ul>
+            </div>
+          </div>
+          <div class="professor-note">
+            <h4>Комментарий преподавателя</h4>
+            <p id="professorNote">На экзамене начинайте с определения, затем раскрывайте элементы, классификацию и правовые последствия.</p>
+          </div>
+          <div class="professor-note answer-model hidden-until-check">
+            <h4>Как ответить на отлично</h4>
+            <ol id="answerPlan"></ol>
+          </div>
+          <div class="grid deep-review hidden-until-check">
+            <div>
+              <h4>Допустимые формулировки</h4>
+              <ul id="variantList"></ul>
+            </div>
+            <div>
+              <h4>Типичные ошибки</h4>
+              <ul id="mistakeList"></ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="listPanel" class="panel">
+          <input id="searchInput" class="search" type="search" placeholder="Найти вопрос..." />
+          <div id="questionList" class="question-list"></div>
+        </section>
+      </aside>
+    </main>
+
+    <script src="./data.js?v=2"></script>
+    <script src="./app.js?v=2"></script>
+  </body>
+</html>
